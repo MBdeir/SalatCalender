@@ -7,8 +7,8 @@ public class Location
 
     private Location(City city, Country country)
     {
-        Country = country;
         City = city;
+        Country = country;
     }
 
     public static Location SetLocation(City city)

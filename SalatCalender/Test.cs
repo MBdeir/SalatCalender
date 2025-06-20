@@ -22,21 +22,23 @@ public class Test
     {
         var salatTime = await Scrapper.Init();
 
-
         Calender todaysEvents = new Calender();
         foreach (var prayer in salatTime.Prayers)
         {
-            Event _event = new Event();
-            _event.Eventify(prayer);
-            todaysEvents.Events.Add(_event);
+            var builtEvent = new Event(
+                prayer.PrayerName.ToString(),
+                (prayer.PrayerTime, Location.SetLocation(City.Sydney)),
+                (prayer.PrayerTime, Location.SetLocation(City.Sydney)),
+                prayer.PrayerName
+                );
+            todaysEvents.Events.Add(builtEvent);
         }
 
+        var ics = todaysEvents.ToString();
 
+        var filePath = Path.Combine("C:\\Users\\moeyb\\Code\\Mohammad\\SalatCalender\\SalatCalender", "calendar.ics");
+        await File.WriteAllTextAsync(filePath, ics);
 
-        //Location.SetLocation(City.Sydney);
-
-        //string ics = Calender.ToString();
-        //Console.WriteLine(ics);
         return new OkResult();
     }
 }
