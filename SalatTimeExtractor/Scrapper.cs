@@ -5,7 +5,7 @@ namespace SalatTimeExtractor;
 public static class Scrapper
 {
     private const string url = "https://www.aljaafaria.com.au";
-   
+
     public static async Task<SalatDTO> Init()
     {
         var httpClient = new HttpClient();
@@ -22,12 +22,12 @@ public static class Scrapper
             return new SalatDTO { };
         }
 
-        string GetTime(string prayerName)
+        string GetTime(Prayer prayerName)
         {
             foreach (var row in rows)
             {
                 var titleNode = row.SelectSingleNode(".//span[contains(@class,'ptime-title')]");
-                if (titleNode != null && titleNode.InnerText.Trim().Equals(prayerName, StringComparison.OrdinalIgnoreCase))
+                if (titleNode != null && titleNode.InnerText.Trim().Equals(prayerName.ToString(), StringComparison.OrdinalIgnoreCase))
                 {
                     var timeNode = row.SelectSingleNode(".//div[contains(@class,'col-xs-4')][2]/span");
                     if (timeNode != null)
@@ -39,21 +39,22 @@ public static class Scrapper
             return string.Empty;
         }
 
-        var prayersToday = new SalatDTO
+        var PrayersToReturn = new SalatDTO();
+
+        foreach (Prayer prayer in Enum.GetValues(typeof(Prayer)))
         {
-            Fajr = HelperMethods.String2DateTime(GetTime(nameof(Prayer.Fajr))),
-            //Duhur = HelperMethods.String2DateTime(GetTime(nameof(Prayer.Duhur))),
-            //Asr = HelperMethods.String2DateTime(GetTime(nameof(Prayer.Asr))),
-            //Maghrib = HelperMethods.String2DateTime(GetTime(nameof(Prayer.Maghrib))),
-            //Isha = HelperMethods.String2DateTime(GetTime(nameof(Prayer.Isha))),
-        };
+            if (string.IsNullOrEmpty(GetTime(prayer)))
+            {
+                var prayerToAdd = new Prayers
+                {
+                    PrayerName = prayer
+                };
 
-        Console.WriteLine($"Fajr is {prayersToday.Fajr}");
-        //Console.WriteLine($"Duhur is {prayersToday.Duhur}");
-        //Console.WriteLine($"Asr is {prayersToday.Asr}");
-        //Console.WriteLine($"Maghrib is {prayersToday.Maghrib}");
-        //Console.WriteLine($"Isha is {prayersToday.Isha}");
+                PrayersToReturn.Prayers.Add(prayerToAdd);
+            }
+        }
 
-        return prayersToday;
+
+        return PrayersToReturn;
     }
 }

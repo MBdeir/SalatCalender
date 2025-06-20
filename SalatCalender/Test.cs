@@ -18,10 +18,12 @@ public class Test
     }
 
     [Function("Test")]
-    public async Task<IActionResult> Run([HttpTrigger(AuthorizationLevel.Function, "get" )] HttpRequest req)
+    public async Task<IActionResult> Run([HttpTrigger(AuthorizationLevel.Function, "get")] HttpRequest req)
     {
         var salatTime = await Scrapper.Init();
         salatTime.Fajr.AddDays(1);
+
+        Location.CreateLocation(City.Sydney);
 
         string ics = Calender.ToString();
         Console.WriteLine(ics);

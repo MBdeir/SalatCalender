@@ -11,7 +11,7 @@ public class Location
         City = city;
     }
 
-    public Location CreateLocation(City city)
+    public static Location CreateLocation(City city)
     {
         Country country = city switch
         {

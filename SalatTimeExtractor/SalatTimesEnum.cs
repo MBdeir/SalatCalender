@@ -11,9 +11,11 @@ public enum Prayer
 
 public class SalatDTO
 {
-    public DateTime Fajr { get; set; }
-    public DateTime? Duhur { get; set; }
-    public DateTime? Asr { get; set; }
-    public DateTime? Maghrib { get; set; }
-    public DateTime? Isha { get; set; }
+    public List<Prayers> Prayers { get; set; } = new();
+}
+
+public class Prayers
+{
+    //public Status Status { get; set; } = Status.CONFIRMED;
+    public Prayer PrayerName { get; set; }
 }
