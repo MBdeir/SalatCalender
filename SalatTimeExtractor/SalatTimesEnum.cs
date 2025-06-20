@@ -11,7 +11,7 @@ public enum SalatEnum
 
 public class SalatDTO
 {
-    public DateTime? Fajr { get; set; }
+    public DateTime Fajr { get; set; }
     public DateTime? Duhur { get; set; }
     public DateTime? Asr { get; set; }
     public DateTime? Maghrib { get; set; }

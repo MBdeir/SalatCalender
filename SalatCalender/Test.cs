@@ -19,8 +19,8 @@ public class Test
     [Function("Test")]
     public async Task<IActionResult> Run([HttpTrigger(AuthorizationLevel.Function, "get" )] HttpRequest req)
     {
-        await Scrapper.Init();
-
+        var salatTime = await Scrapper.Init();
+        salatTime.Fajr.AddDays(1);
         return new OkResult();
     }
 }

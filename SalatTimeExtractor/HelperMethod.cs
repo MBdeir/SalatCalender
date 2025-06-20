@@ -8,10 +8,10 @@ namespace SalatTimeExtractor;
 
 public static class HelperMethods
 {
-    public static DateTime? String2DateTime(string time)
+    public static DateTime String2DateTime(string time)
     {
-        if (DateTime.TryParse(time, out var datetime))
-            return datetime;
-        return null;
+        return DateTime.Parse(time);
+        //if (DateTime.TryParse(time, out var datetime))
+        //    return ;
     }
 }

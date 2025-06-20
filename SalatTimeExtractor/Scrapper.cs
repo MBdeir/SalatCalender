@@ -6,7 +6,7 @@ public static class Scrapper
 {
     private const string url = "https://www.aljaafaria.com.au";
    
-    public static async Task Init()
+    public static async Task<SalatDTO> Init()
     {
         var httpClient = new HttpClient();
         var html = await httpClient.GetStringAsync(url);
@@ -19,7 +19,7 @@ public static class Scrapper
         if (rows == null)
         {
             Console.WriteLine("No prayer time rows found.");
-            return;
+            return new SalatDTO { };
         }
 
         string GetTime(string prayerName)
@@ -48,10 +48,12 @@ public static class Scrapper
             Isha = HelperMethods.String2DateTime(GetTime(nameof(SalatEnum.Isha))),
         };
 
-        Console.WriteLine($"Fajr: {prayersToday.Fajr}");
-        Console.WriteLine($"Duhur: {prayersToday.Duhur}");
-        Console.WriteLine($"Asr: {prayersToday.Asr}");
-        Console.WriteLine($"Maghrib: {prayersToday.Maghrib}");
-        Console.WriteLine($"Isha: {prayersToday.Isha}");
+        Console.WriteLine($"Fajr is {prayersToday.Fajr}");
+        Console.WriteLine($"Duhur is {prayersToday.Duhur}");
+        Console.WriteLine($"Asr is {prayersToday.Asr}");
+        Console.WriteLine($"Maghrib is {prayersToday.Maghrib}");
+        Console.WriteLine($"Isha is {prayersToday.Isha}");
+
+        return prayersToday;
     }
 }

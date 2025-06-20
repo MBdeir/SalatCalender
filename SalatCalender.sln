@@ -7,6 +7,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SalatCalender", "SalatCalen
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SalatTimeExtractor", "SalatTimeExtractor\SalatTimeExtractor.csproj", "{6CE51DD1-2368-4AE8-AF56-08F0E3927C6B}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CalendarConstructor", "CalendarConstructor\CalendarConstructor.csproj", "{CD532CD3-E7F7-43DB-A96A-C781BB0577BF}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -21,6 +23,10 @@ Global
 		{6CE51DD1-2368-4AE8-AF56-08F0E3927C6B}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{6CE51DD1-2368-4AE8-AF56-08F0E3927C6B}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{6CE51DD1-2368-4AE8-AF56-08F0E3927C6B}.Release|Any CPU.Build.0 = Release|Any CPU
+		{CD532CD3-E7F7-43DB-A96A-C781BB0577BF}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{CD532CD3-E7F7-43DB-A96A-C781BB0577BF}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{CD532CD3-E7F7-43DB-A96A-C781BB0577BF}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{CD532CD3-E7F7-43DB-A96A-C781BB0577BF}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
