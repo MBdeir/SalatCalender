@@ -43,17 +43,18 @@ public static class Scrapper
 
         foreach (Prayer prayer in Enum.GetValues(typeof(Prayer)))
         {
-            if (string.IsNullOrEmpty(GetTime(prayer)))
+            string PrayerTime = GetTime(prayer);
+            if (!string.IsNullOrEmpty(PrayerTime))
             {
                 var prayerToAdd = new Prayers
                 {
-                    PrayerName = prayer
+                    PrayerName = prayer,
+                    PrayerTime = HelperMethods.String2DateTime(PrayerTime)
                 };
 
                 PrayersToReturn.Prayers.Add(prayerToAdd);
             }
         }
-
 
         return PrayersToReturn;
     }

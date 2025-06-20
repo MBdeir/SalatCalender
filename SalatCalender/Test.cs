@@ -21,12 +21,14 @@ public class Test
     public async Task<IActionResult> Run([HttpTrigger(AuthorizationLevel.Function, "get")] HttpRequest req)
     {
         var salatTime = await Scrapper.Init();
-        salatTime.Fajr.AddDays(1);
 
-        Location.CreateLocation(City.Sydney);
+        salatTime.Prayers.ForEach(p => Console.WriteLine(p.PrayerName));
 
-        string ics = Calender.ToString();
-        Console.WriteLine(ics);
+
+        //Location.CreateLocation(City.Sydney);
+
+        //string ics = Calender.ToString();
+        //Console.WriteLine(ics);
         return new OkResult();
     }
 }
