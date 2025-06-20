@@ -55,7 +55,6 @@ public static class Scrapper
                 PrayersToReturn.Prayers.Add(prayerToAdd);
             }
         }
-
         return PrayersToReturn;
     }
 }

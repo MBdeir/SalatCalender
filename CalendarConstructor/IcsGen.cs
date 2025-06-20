@@ -1,14 +1,15 @@
 ﻿using SalatTimeExtractor;
 using System.Text;
+using static System.Runtime.InteropServices.JavaScript.JSType;
 
 namespace CalendarConstructor;
 
 public class Calender
 {
     private const string AppName = "SalatCal";
-    public static List<Event> Events { get; set; } = new();
+    public List<Event> Events { get; set; }
 
-    public static string ToString()
+    public string ToString()
     {
         StringBuilder sb = new StringBuilder(
             "BEGIN:VCALENDAR\n" +
@@ -33,21 +34,32 @@ public class Calender
 public class Event
 {
     public string UID { get; set; }
-    public string SUMMARY { get; set; }
+    public string SUMMARY { get; set; } = "VEVENT";
     public (DateTime DateTime, Location Location) DTSTART { get; set; }
-    public (DateTime DateTime, Location Location) DTEND { get; set; }
+    public (DateTime DateTime, Location Location) DTEND { get; set; } 
     public Prayer DESCRIPTION { get; set; }
-    public Status STATUS { get; set; }
+    public Status STATUS { get; set; } = Status.CONFIRMED;
 
     public override string ToString()
     {
         return
         $"{nameof(UID)}:blahblah@example.com\n" +
-        $"{nameof(SUMMARY)}:VEVENT\n" +
+        $"{nameof(SUMMARY)}:{SUMMARY}\n" +
         $"{nameof(DTSTART)};TZID={DTSTART.Location.Country}/{DTSTART.Location.City}:{DTSTART.DateTime.ToString("yyyyMMdd'T'HHmmss")}\n" +
         $"{nameof(DTEND)};TZID={DTEND.Location.Country}/{DTEND.Location.City}:{DTSTART.DateTime.AddMinutes(7).ToString("yyyyMMdd'T'HHmmss")}\n" +
         $"{nameof(DESCRIPTION)}:{DESCRIPTION} Prayer Time" +
         $"{nameof(STATUS)}:{STATUS}";
+    }
+
+    public Event Eventify(Prayers prayer)
+    {
+        return new Event
+        {
+            UID = prayer.PrayerName.ToString(),
+            DTSTART = (prayer.PrayerTime, Location.SetLocation(City.Sydney)),
+            DTEND = (prayer.PrayerTime.AddMinutes(7), Location.SetLocation(City.Sydney)),
+            DESCRIPTION = prayer.PrayerName
+        };
     }
 }
 

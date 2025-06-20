@@ -22,10 +22,18 @@ public class Test
     {
         var salatTime = await Scrapper.Init();
 
-        salatTime.Prayers.ForEach(p => Console.WriteLine(p.PrayerName));
+
+        Calender todaysEvents = new Calender();
+        foreach (var prayer in salatTime.Prayers)
+        {
+            Event _event = new Event();
+            _event.Eventify(prayer);
+            todaysEvents.Events.Add(_event);
+        }
 
 
-        //Location.CreateLocation(City.Sydney);
+
+        //Location.SetLocation(City.Sydney);
 
         //string ics = Calender.ToString();
         //Console.WriteLine(ics);
