@@ -1,3 +1,4 @@
+using CalendarConstructor;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Http.HttpResults;
 using Microsoft.AspNetCore.Mvc;
@@ -22,6 +23,8 @@ public class Test
         var salatTime = await Scrapper.Init();
         salatTime.Fajr.AddDays(1);
 
+        string ics = Calender.ToString();
+        Console.WriteLine(ics);
         return new OkResult();
     }
 }

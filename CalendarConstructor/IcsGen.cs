@@ -6,7 +6,7 @@ namespace CalendarConstructor;
 public class Calender
 {
     private const string AppName = "SalatCal";
-    public static List<Event> Events { get; set; }
+    public static List<Event> Events { get; set; } = new();
 
     public static string ToString()
     {
@@ -25,6 +25,8 @@ public class Calender
                 "END:VEVENT\n"
                 ) ;
         }
+
+        sb.Append("END:VCALENDAR");
         return sb.ToString();
     }
 }
@@ -35,7 +37,7 @@ public class Event
     public (DateTime DateTime, Location Location) DTSTART { get; set; }
     public (DateTime DateTime, Location Location) DTEND { get; set; }
     public Prayer DESCRIPTION { get; set; }
-    public string STATUS { get; set; }
+    public Status STATUS { get; set; }
 
     public override string ToString()
     {
@@ -45,10 +47,16 @@ public class Event
         $"{nameof(DTSTART)};TZID={DTSTART.Location.Country}/{DTSTART.Location.City}:{DTSTART.DateTime.ToString("yyyyMMdd'T'HHmmss")}\n" +
         $"{nameof(DTEND)};TZID={DTEND.Location.Country}/{DTEND.Location.City}:{DTSTART.DateTime.AddMinutes(7).ToString("yyyyMMdd'T'HHmmss")}\n" +
         $"{nameof(DESCRIPTION)}:{DESCRIPTION} Prayer Time" +
-        $"{nameof(STATUS)}:CONFIRMED";
+        $"{nameof(STATUS)}:{STATUS}";
     }
 }
 
 
+public enum Status
+{ 
+    CANCLLED,
+    TENTATIVE,
+    CONFIRMED
+}
 
 

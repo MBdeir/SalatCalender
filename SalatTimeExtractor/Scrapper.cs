@@ -42,17 +42,17 @@ public static class Scrapper
         var prayersToday = new SalatDTO
         {
             Fajr = HelperMethods.String2DateTime(GetTime(nameof(Prayer.Fajr))),
-            Duhur = HelperMethods.String2DateTime(GetTime(nameof(Prayer.Duhur))),
-            Asr = HelperMethods.String2DateTime(GetTime(nameof(Prayer.Asr))),
-            Maghrib = HelperMethods.String2DateTime(GetTime(nameof(Prayer.Maghrib))),
-            Isha = HelperMethods.String2DateTime(GetTime(nameof(Prayer.Isha))),
+            //Duhur = HelperMethods.String2DateTime(GetTime(nameof(Prayer.Duhur))),
+            //Asr = HelperMethods.String2DateTime(GetTime(nameof(Prayer.Asr))),
+            //Maghrib = HelperMethods.String2DateTime(GetTime(nameof(Prayer.Maghrib))),
+            //Isha = HelperMethods.String2DateTime(GetTime(nameof(Prayer.Isha))),
         };
 
         Console.WriteLine($"Fajr is {prayersToday.Fajr}");
-        Console.WriteLine($"Duhur is {prayersToday.Duhur}");
-        Console.WriteLine($"Asr is {prayersToday.Asr}");
-        Console.WriteLine($"Maghrib is {prayersToday.Maghrib}");
-        Console.WriteLine($"Isha is {prayersToday.Isha}");
+        //Console.WriteLine($"Duhur is {prayersToday.Duhur}");
+        //Console.WriteLine($"Asr is {prayersToday.Asr}");
+        //Console.WriteLine($"Maghrib is {prayersToday.Maghrib}");
+        //Console.WriteLine($"Isha is {prayersToday.Isha}");
 
         return prayersToday;
     }

@@ -5,32 +5,32 @@ public class Location
     public Country Country { get; }
     public City City { get; }
 
-    public Location(Country country, City city)
+    private Location(City city, Country country)
     {
-        if (!LocationMap.TryGetValue(city, out var expectedCountry) || expectedCountry != country)
-        {
-            throw new ArgumentException($"City {city} does not belong to country {country}");
-        }
-
         Country = country;
         City = city;
     }
 
-    private static readonly Dictionary<City, Country> LocationMap = new()
+    public Location CreateLocation(City city)
     {
-        { City.Sydney, Country.Australia },
-    };
+        Country country = city switch
+        {
+            City.Sydney => Country.Australia,
+            City.Beirut => Country.Lebanon
+        };
+
+        return new Location(city, country);
+    }
 }
 
 public enum Country
 {
-    Australia
+    Australia,
+    Lebanon
 }
 
 public enum City
 {
     Sydney,
-    Brisbane,
-    Melbourne,
-    Perth
+    Beirut
 }
