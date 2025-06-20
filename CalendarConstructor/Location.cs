@@ -2,8 +2,8 @@
 
 public class Location
 {
-    public Country Country { get; set; }
-    public City City { get; set; }
+    public Country Country { get; }
+    public City City { get; }
 
     public Location(Country country, City city)
     {
@@ -29,5 +29,8 @@ public enum Country
 
 public enum City
 {
-    Sydney
+    Sydney,
+    Brisbane,
+    Melbourne,
+    Perth
 }

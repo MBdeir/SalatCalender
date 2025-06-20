@@ -21,6 +21,7 @@ public class Test
     {
         var salatTime = await Scrapper.Init();
         salatTime.Fajr.AddDays(1);
+
         return new OkResult();
     }
 }

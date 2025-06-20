@@ -41,11 +41,11 @@ public static class Scrapper
 
         var prayersToday = new SalatDTO
         {
-            Fajr = HelperMethods.String2DateTime(GetTime(nameof(SalatEnum.Fajr))),
-            Duhur = HelperMethods.String2DateTime(GetTime(nameof(SalatEnum.Duhur))),
-            Asr = HelperMethods.String2DateTime(GetTime(nameof(SalatEnum.Asr))),
-            Maghrib = HelperMethods.String2DateTime(GetTime(nameof(SalatEnum.Maghrib))),
-            Isha = HelperMethods.String2DateTime(GetTime(nameof(SalatEnum.Isha))),
+            Fajr = HelperMethods.String2DateTime(GetTime(nameof(Prayer.Fajr))),
+            Duhur = HelperMethods.String2DateTime(GetTime(nameof(Prayer.Duhur))),
+            Asr = HelperMethods.String2DateTime(GetTime(nameof(Prayer.Asr))),
+            Maghrib = HelperMethods.String2DateTime(GetTime(nameof(Prayer.Maghrib))),
+            Isha = HelperMethods.String2DateTime(GetTime(nameof(Prayer.Isha))),
         };
 
         Console.WriteLine($"Fajr is {prayersToday.Fajr}");

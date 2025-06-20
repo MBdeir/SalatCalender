@@ -1,6 +1,6 @@
 ﻿namespace SalatTimeExtractor;
 
-public enum SalatEnum
+public enum Prayer
 {
     Fajr,
     Duhur,
