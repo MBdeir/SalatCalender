@@ -36,15 +36,22 @@ public static class Scrapper
                     }
                 }
             }
-            return "Not found";
+            return string.Empty;
         }
 
-        var fajr = GetTime("Fajr");
-        var duhur = GetTime("Duhur");
-        var maghrib = GetTime("Maghrib");
+        var prayersToday = new SalatDTO
+        {
+            Fajr = HelperMethods.String2DateTime(GetTime(nameof(SalatEnum.Fajr))),
+            Duhur = HelperMethods.String2DateTime(GetTime(nameof(SalatEnum.Duhur))),
+            Asr = HelperMethods.String2DateTime(GetTime(nameof(SalatEnum.Asr))),
+            Maghrib = HelperMethods.String2DateTime(GetTime(nameof(SalatEnum.Maghrib))),
+            Isha = HelperMethods.String2DateTime(GetTime(nameof(SalatEnum.Isha))),
+        };
 
-        Console.WriteLine($"Fajr: {fajr}");
-        Console.WriteLine($"Duhur: {duhur}");
-        Console.WriteLine($"Maghrib: {maghrib}");
+        Console.WriteLine($"Fajr: {prayersToday.Fajr}");
+        Console.WriteLine($"Duhur: {prayersToday.Duhur}");
+        Console.WriteLine($"Asr: {prayersToday.Asr}");
+        Console.WriteLine($"Maghrib: {prayersToday.Maghrib}");
+        Console.WriteLine($"Isha: {prayersToday.Isha}");
     }
 }
