@@ -13,7 +13,8 @@ public class Calender
     {
         StringBuilder sb = new StringBuilder(
             "BEGIN:VCALENDAR\n" +
-            "VERSION:1.0\n" +
+            "VERSION:2.0\n" +
+            "METHOD:PUBLISH \n"+
             $"PRODID:-//{AppName}//Prayer Times//EN\n" +
             "CALSCALE:GREGORIAN\n"
             );
@@ -42,7 +43,7 @@ public class Event
     }
 
     public string UID;
-    public string SUMMARY { get; set; } = "VEVENT";
+    public string SUMMARY { get; set; }
     public (DateTime DateTime, Location Location) DTSTART { get; set; }
     public (DateTime DateTime, Location Location) DTEND { get; set; }
     public Prayer DESCRIPTION { get; set; }
@@ -52,8 +53,8 @@ public class Event
     {
         return
         "\n" +
-        $"{nameof(UID)}:blahblah@example.com\n" +
-        $"{nameof(SUMMARY)}:{SUMMARY}\n" +
+        $"{nameof(UID)}:{Guid.NewGuid()}\n" +
+        $"{nameof(SUMMARY)}:{DESCRIPTION} Prayer Time\n" +
         $"{nameof(DTSTART)};TZID={DTSTART.Location.Country}/{DTSTART.Location.City}:{DTSTART.DateTime.ToString("yyyyMMdd'T'HHmmss")}\n" +
         $"{nameof(DTEND)};TZID={DTEND.Location.Country}/{DTEND.Location.City}:{DTEND.DateTime.AddMinutes(7).ToString("yyyyMMdd'T'HHmmss")}\n" +
         $"{nameof(DESCRIPTION)}:{DESCRIPTION} Prayer Time\n" +
