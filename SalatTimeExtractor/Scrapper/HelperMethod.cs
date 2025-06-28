@@ -1,6 +1,6 @@
 ﻿using System.Text;
 
-namespace SalatTimeExtractor.Scrapper;
+namespace SalatTimeExtractor;
 
 public static class HelperMethods
 {
