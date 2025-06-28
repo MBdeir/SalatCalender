@@ -18,7 +18,7 @@ public class Salat
     }
 
     [Function("Test")]
-    public async Task<IActionResult> Run([HttpTrigger(AuthorizationLevel.Anonymous, "get", "head", "options", Route = "salat.ics")] HttpRequest req)
+    public async Task<IActionResult> Run([HttpTrigger(AuthorizationLevel.Anonymous, "get", "head", "options", Route = $"salat.ics")] HttpRequest req)
     {
         
         var salatTime = await Scrapper.Init();

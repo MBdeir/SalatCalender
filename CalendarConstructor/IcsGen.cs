@@ -11,21 +11,16 @@ public class Calender
 
     public string ToString()
     {
-        StringBuilder sb = new StringBuilder(
-            "BEGIN:VCALENDAR\n" +
-            "VERSION:2.0\n" +
-            "METHOD:PUBLISH \n"+
-            $"PRODID:-//{AppName}//Prayer Times//EN\n" +
-            "CALSCALE:GREGORIAN\n"
-            );
+        StringBuilder sb = new();
+        sb.AppendLine("BEGIN:VCALENDAR");
+        sb.AppendLine("VERSION:2.0");
+        sb.AppendLine("METHOD:PUBLISH");
+        sb.AppendLine($"PRODID:-//{AppName}//Prayer Times//EN");
+        sb.AppendLine("CALSCALE:GREGORIAN");
 
         foreach (var _event in Events)
         {
-            sb.Append(
-                "BEGIN:VEVENT\n" +
-                _event.ToString()+
-                "END:VEVENT\n"
-                ) ;
+            sb.AppendLine(_event.ToString());
         }
 
         sb.Append("END:VCALENDAR");
@@ -34,33 +29,34 @@ public class Calender
 }
 public class Event
 {
-    public Event(string uid, (DateTime DateTime, Location Location) dtstart, (DateTime DateTime, Location Location) dtend, Prayer desc)
+    public Event(DateTime dtstart, Prayer desc, City location)
     {
-        UID = uid;
-        DTSTART = (dtstart.DateTime, dtstart.Location);
-        DTEND = (dtend.DateTime.AddMinutes(7), dtend.Location);
+        DTSTART = dtstart;
         DESCRIPTION = desc;
+        Location = Location.SetLocation(location);
     }
 
     public string UID;
     public string SUMMARY { get; set; }
-    public (DateTime DateTime, Location Location) DTSTART { get; set; }
-    public (DateTime DateTime, Location Location) DTEND { get; set; }
+    public DateTime DTSTART { get; set; }
+    public DateTime DTEND { get; set; }
     public Prayer DESCRIPTION { get; set; }
+
+    public Location Location { get; set; }
     public Status STATUS { get; set; } = Status.CONFIRMED; 
 
     public override string ToString()
     {
-        return
-        "\n" +
-        $"{nameof(UID)}:{Guid.NewGuid()}\n" +
-        $"{nameof(SUMMARY)}:{DESCRIPTION} Prayer Time\n" +
-        $"{nameof(DTSTART)};TZID={DTSTART.Location.Country}/{DTSTART.Location.City}:{DTSTART.DateTime.ToString("yyyyMMdd'T'HHmmss")}\n" +
-        $"{nameof(DTEND)};TZID={DTEND.Location.Country}/{DTEND.Location.City}:{DTEND.DateTime.AddMinutes(7).ToString("yyyyMMdd'T'HHmmss")}\n" +
-        $"{nameof(DESCRIPTION)}:{DESCRIPTION} Prayer Time\n" +
-        $"{nameof(STATUS)}:{STATUS}" +
-        "\n"; 
-
+        var sb = new StringBuilder();
+        sb.AppendLine("BEGIN:VEVENT");
+        sb.AppendLine($"UID:{Guid.NewGuid()}");
+        sb.AppendLine($"SUMMARY:{DESCRIPTION} Prayer Time");
+        sb.AppendLine($"DSTART;TZID={Location.Country}/{Location.City}:{DTSTART.ToString("yyyyMMdd'T'HHmmss")}");
+        //sb.AppendLine($"DTEND;TZID={Location.Country}/{Location.City}:{DTEND.ToString("yyyyMMdd'T'HHmmss")}");
+        //sb.AppendLine("DESCRIPTION:{DESCRIPTION} Prayer Time");
+        sb.AppendLine($"STATUS:{STATUS}");
+        sb.AppendLine("END:VEVENT");
+        return sb.ToString();
     }
 }
 
