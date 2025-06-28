@@ -20,17 +20,14 @@ public class Salat
     [Function("Test")]
     public async Task<IActionResult> Run([HttpTrigger(AuthorizationLevel.Anonymous, "get", "head", "options", Route = $"salat.ics")] HttpRequest req)
     {
-        
-        var salatTime = await Scrapper.Init();
+        const City Sydney = City.Sydney;  
+
+        var salatTime = await Scrapper.Init(Sydney);
 
         Calender todaysEvents = new Calender();
         foreach (var prayer in salatTime.Prayers)
         {
-            var builtEvent = new Event(
-                Guid.NewGuid().ToString(),
-                (prayer.PrayerTime, Location.SetLocation(City.Sydney)),
-                (prayer.PrayerTime, Location.SetLocation(City.Sydney)),
-                 prayer.PrayerName);
+            var builtEvent = new Event(prayer.PrayerTime, prayer.PrayerName, Sydney);
             todaysEvents.Events.Add(builtEvent);
         }
 

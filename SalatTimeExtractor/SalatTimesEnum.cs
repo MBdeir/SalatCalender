@@ -16,9 +16,7 @@ public class SalatDTO
 
 public class Prayers
 {
-    //public Status Status { get; set; } = Status.CONFIRMED;
     public Prayer PrayerName { get; set; }
 
     public DateTime PrayerTime { get; set; }
-
 }
