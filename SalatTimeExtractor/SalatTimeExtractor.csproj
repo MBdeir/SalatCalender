@@ -11,9 +11,9 @@
   </ItemGroup>
 
   <ItemGroup>
-    <Reference Include="CalendarConstructor">
-      <HintPath>..\CalendarConstructor\bin\Release\net8.0\CalendarConstructor.dll</HintPath>
-    </Reference>
+	  <Compile Update="Sydney.cs">
+		  <DependentUpon>Scrapper.cs</DependentUpon>
+	  </Compile>
   </ItemGroup>
 
 </Project>

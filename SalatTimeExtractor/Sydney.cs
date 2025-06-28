@@ -1,64 +1,62 @@
 ﻿using HtmlAgilityPack;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace SalatTimeExtractor;
 
-public partial class Scrapper
+public static partial class Scrapper
 {
-    private const string url = "https://www.aljaafaria.com.au";
-    public static async Task<SalatDTO> Sydney()
+    public class Sydney 
     {
-        var httpClient = new HttpClient();
-        var html = await httpClient.GetStringAsync(url);
-
-        var doc = new HtmlDocument();
-        doc.LoadHtml(html);
-
-        var rows = doc.DocumentNode.SelectNodes("//div[contains(@class,'ptime-row')]");
-
-        if (rows == null)
+        private const string URL = "https://www.aljaafaria.com.au";
+        public static async Task<SalatDTO> Run()
         {
-            Console.WriteLine("No prayer time rows found.");
-            return new SalatDTO { };
-        }
+            var httpClient = new HttpClient();
+            var html = await httpClient.GetStringAsync(URL);
 
-        string GetTime(Prayer prayerName)
-        {
-            foreach (var row in rows)
+            var doc = new HtmlDocument();
+            doc.LoadHtml(html);
+
+            var rows = doc.DocumentNode.SelectNodes("//div[contains(@class,'ptime-row')]");
+
+            if (rows == null)
             {
-                var titleNode = row.SelectSingleNode(".//span[contains(@class,'ptime-title')]");
-                if (titleNode != null && titleNode.InnerText.Trim().Equals(prayerName.ToString(), StringComparison.OrdinalIgnoreCase))
+                Console.WriteLine("No prayer time rows found.");
+                return new SalatDTO { };
+            }
+
+            string GetTime(Prayer prayerName)
+            {
+                foreach (var row in rows)
                 {
-                    var timeNode = row.SelectSingleNode(".//div[contains(@class,'col-xs-4')][2]/span");
-                    if (timeNode != null)
+                    var titleNode = row.SelectSingleNode(".//span[contains(@class,'ptime-title')]");
+                    if (titleNode != null && titleNode.InnerText.Trim().Equals(prayerName.ToString(), StringComparison.OrdinalIgnoreCase))
                     {
-                        return HtmlEntity.DeEntitize(timeNode.InnerText.Split('<')[0].Trim());
+                        var timeNode = row.SelectSingleNode(".//div[contains(@class,'col-xs-4')][2]/span");
+                        if (timeNode != null)
+                        {
+                            return HtmlEntity.DeEntitize(timeNode.InnerText.Split('<')[0].Trim());
+                        }
                     }
                 }
+                return string.Empty;
             }
-            return string.Empty;
-        }
 
-        var PrayersToReturn = new SalatDTO();
+            var PrayersToReturn = new SalatDTO();
 
-        foreach (Prayer prayer in Enum.GetValues(typeof(Prayer)))
-        {
-            string PrayerTime = GetTime(prayer);
-            if (!string.IsNullOrEmpty(PrayerTime))
+            foreach (Prayer prayer in Enum.GetValues(typeof(Prayer)))
             {
-                var prayerToAdd = new Prayers
+                string PrayerTime = GetTime(prayer);
+                if (!string.IsNullOrEmpty(PrayerTime))
                 {
-                    PrayerName = prayer,
-                    PrayerTime = HelperMethods.String2DateTime(PrayerTime)
-                };
+                    var prayerToAdd = new Prayers
+                    {
+                        PrayerName = prayer,
+                        PrayerTime = HelperMethods.String2DateTime(PrayerTime)
+                    };
 
-                PrayersToReturn.Prayers.Add(prayerToAdd);
+                    PrayersToReturn.Prayers.Add(prayerToAdd);
+                }
             }
+            return PrayersToReturn;
         }
-        return PrayersToReturn;
     }
 }

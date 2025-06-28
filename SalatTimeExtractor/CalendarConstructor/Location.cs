@@ -1,4 +1,4 @@
-﻿namespace CalendarConstructor;
+﻿namespace SalatTimeExtractor;
 
 public class Location
 {

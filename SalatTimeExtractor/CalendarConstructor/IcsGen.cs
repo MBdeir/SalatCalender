@@ -1,7 +1,6 @@
-﻿using SalatTimeExtractor;
-using System.Text;
+﻿using System.Text;
 
-namespace CalendarConstructor;
+namespace SalatTimeExtractor;
 
 public class Calender
 {
@@ -16,6 +15,7 @@ public class Calender
         sb.AppendLine("METHOD:PUBLISH");
         sb.AppendLine($"PRODID:-//{AppName}//Prayer Times//EN");
         sb.AppendLine("CALSCALE:GREGORIAN");
+        sb.AppendLine();
 
         foreach (var _event in Events)
         {
@@ -51,7 +51,7 @@ public class Event
         sb.AppendLine($"UID:{Guid.NewGuid()}");
         sb.AppendLine($"SUMMARY:{DESCRIPTION} Prayer Time");
         sb.AppendLine($"DSTART;TZID={Location.Country}/{Location.City}:{DTSTART.ToString("yyyyMMdd'T'HHmmss")}");
-        //sb.AppendLine($"DTEND;TZID={Location.Country}/{Location.City}:{DTEND.ToString("yyyyMMdd'T'HHmmss")}");
+        sb.AppendLine($"DTEND;TZID={Location.Country}/{Location.City}:{DTEND.ToString("yyyyMMdd'T'HHmmss")}");
         //sb.AppendLine("DESCRIPTION:{DESCRIPTION} Prayer Time");
         sb.AppendLine($"STATUS:{STATUS}");
         sb.AppendLine("END:VEVENT");
