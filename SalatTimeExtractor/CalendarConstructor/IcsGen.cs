@@ -50,8 +50,8 @@ public class Event
         sb.AppendLine("BEGIN:VEVENT");
         sb.AppendLine($"UID:{Guid.NewGuid()}");
         sb.AppendLine($"SUMMARY:{DESCRIPTION} Prayer Time");
-        sb.AppendLine($"DSTART;TZID={Location.Country}/{Location.City}:{DTSTART.ToString("yyyyMMdd'T'HHmmss")}");
-        sb.AppendLine($"DTEND;TZID={Location.Country}/{Location.City}:{DTEND.ToString("yyyyMMdd'T'HHmmss")}");
+        sb.AppendLine($"DTSTART;TZID={Location.Country}/{Location.City}:{DTSTART.ToString("yyyyMMdd'T'HHmmss")}");
+        //sb.AppendLine($"DTEND;TZID={Location.Country}/{Location.City}:{DTEND.ToString("yyyyMMdd'T'HHmmss")}");
         //sb.AppendLine("DESCRIPTION:{DESCRIPTION} Prayer Time");
         sb.AppendLine($"STATUS:{STATUS}");
         sb.AppendLine("END:VEVENT");

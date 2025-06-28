@@ -15,7 +15,7 @@ public class Salat
         _logger = logger;
     }
 
-    [Function("Salat")]
+    [Function("Test")]
     public async Task<IActionResult> Run([HttpTrigger(AuthorizationLevel.Anonymous, "get", "head", "options", Route = $"salat.ics")] HttpRequest req)
     {
         const City Sydney = City.Sydney;  
