@@ -6,4 +6,10 @@
     <Nullable>enable</Nullable>
   </PropertyGroup>
 
+  <ItemGroup>
+    <Reference Include="SalatTimeExtractor">
+      <HintPath>..\SalatTimeExtractor\bin\Release\net8.0\SalatTimeExtractor.dll</HintPath>
+    </Reference>
+  </ItemGroup>
+
 </Project>

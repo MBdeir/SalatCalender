@@ -17,5 +17,6 @@
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\CalendarConstructor\CalendarConstructor.csproj" />
+    <ProjectReference Include="..\SalatTimeExtractor\SalatTimeExtractor.csproj" />
   </ItemGroup>
 </Project>
