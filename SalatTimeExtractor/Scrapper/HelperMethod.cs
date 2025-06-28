@@ -9,7 +9,6 @@ public static class HelperMethods
     //Expects input as H:mm tt. (Example: 5:15 PM)
     public static string ToString(string date, Location Location)
     {
-        StringBuilder sb = new();
 
         var lexer = date.Split(" ");
 
@@ -37,12 +36,6 @@ public static class HelperMethods
         TimeZoneInfo localTimeZone = TimeZoneInfo.FindSystemTimeZoneById($"{Location.Country}/{Location.City}");
         DateTime localDateTime = TimeZoneInfo.ConvertTimeFromUtc(DateTime.UtcNow, localTimeZone);
 
-        Console.WriteLine(localDateTime);
-
-        Console.WriteLine(localDateTime.Year);
-        Console.WriteLine(localDateTime.Month);
-        Console.WriteLine(localDateTime.Day);
-
         string year = localDateTime.Year.ToString();
         string month = localDateTime.Month.ToString();
         string day = localDateTime.Day.ToString();
@@ -56,10 +49,8 @@ public static class HelperMethods
             day = AppendZero(day);
         }
 
-        sb.Append(year + month + day + "T" + hour + minute + "00");
+        return new StringBuilder(year + month + day + "T" + hour + minute + "00").ToString();
 
-        Console.WriteLine(sb.ToString());
-        return sb.ToString();
         //20250629T171100
     }
 
