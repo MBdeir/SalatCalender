@@ -9,6 +9,7 @@ namespace SalatTimeExtractor;
 
 public partial class Scrapper
 {
+    private const string url = "https://www.aljaafaria.com.au";
     public static async Task<SalatDTO> Sydney()
     {
         var httpClient = new HttpClient();
