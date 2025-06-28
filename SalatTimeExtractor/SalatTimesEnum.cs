@@ -18,5 +18,5 @@ public class Prayers
 {
     public Prayer PrayerName { get; set; }
 
-    public DateTime PrayerTime { get; set; }
+    public string PrayerTime { get; set; }
 }

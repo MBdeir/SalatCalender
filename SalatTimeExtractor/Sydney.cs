@@ -50,7 +50,7 @@ public static partial class Scrapper
                     var prayerToAdd = new Prayers
                     {
                         PrayerName = prayer,
-                        PrayerTime = HelperMethods.String2DateTime(PrayerTime)
+                        PrayerTime = HelperMethods.DateInString(PrayerTime)
                     };
 
                     PrayersToReturn.Prayers.Add(prayerToAdd);

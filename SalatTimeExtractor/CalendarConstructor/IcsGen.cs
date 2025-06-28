@@ -28,7 +28,7 @@ public class Calender
 }
 public class Event
 {
-    public Event(DateTime dtstart, Prayer desc, City location)
+    public Event(string dtstart, Prayer desc, City location)
     {
         DTSTART = dtstart;
         DESCRIPTION = desc;
@@ -37,7 +37,7 @@ public class Event
 
     public string UID;
     public string SUMMARY { get; set; }
-    public DateTime DTSTART { get; set; }
+    public string DTSTART { get; set; }
     public DateTime DTEND { get; set; }
     public Prayer DESCRIPTION { get; set; }
 
@@ -50,7 +50,7 @@ public class Event
         sb.AppendLine("BEGIN:VEVENT");
         sb.AppendLine($"UID:{Guid.NewGuid()}");
         sb.AppendLine($"SUMMARY:{DESCRIPTION} Prayer Time");
-        sb.AppendLine($"DTSTART;TZID={Location.Country}/{Location.City}:{DTSTART.ToString("yyyyMMdd'T'HHmmss")}");
+        sb.AppendLine($"DTSTART;TZID={Location.Country}/{Location.City}:{DTSTART}");
         //sb.AppendLine($"DTEND;TZID={Location.Country}/{Location.City}:{DTEND.ToString("yyyyMMdd'T'HHmmss")}");
         //sb.AppendLine("DESCRIPTION:{DESCRIPTION} Prayer Time");
         sb.AppendLine($"STATUS:{STATUS}");
