@@ -3,6 +3,7 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.Azure.Functions.Worker;
 using Microsoft.Extensions.Logging;
 using SalatTimeExtractor;
+using static SalatTimeExtractor.Calender;
 
 namespace SalatCalender;
 
