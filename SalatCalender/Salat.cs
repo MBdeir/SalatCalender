@@ -20,12 +20,12 @@ public class Salat
     {
         const City Sydney = City.Sydney;  
 
-        var salatTime = await Scrapper.Init(Sydney);
+        var salatInfo = await Scrapper.Init(Sydney);
 
         Calender todaysEvents = new Calender();
-        foreach (var prayer in salatTime.Prayers)
+        foreach (var prayer in salatInfo.Prayers)
         {
-            var builtEvent = new Event(prayer.PrayerTime, prayer.PrayerName, Sydney);
+            var builtEvent = new Event(prayer.PrayerTime, prayer.PrayerName, );
             todaysEvents.Events.Add(builtEvent);
         }
 

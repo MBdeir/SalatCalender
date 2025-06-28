@@ -16,7 +16,8 @@ public class Location
         Country country = city switch
         {
             City.Sydney => Country.Australia,
-            City.Beirut => Country.Lebanon
+            City.Beirut => Country.Lebanon,
+            _ => throw new Exception("Country not supported yet")
         };
 
         return new Location(city, country);

@@ -25,40 +25,39 @@ public class Calender
         sb.Append("END:VCALENDAR");
         return sb.ToString();
     }
-}
-public class Event
-{
-    public Event(string dtstart, Prayer desc, City location)
+
+    public class Event
     {
-        DTSTART = dtstart;
-        DESCRIPTION = desc;
-        Location = Location.SetLocation(location);
-    }
+        public Event(string dtstart, Prayer desc, City location)
+        {
+            DTSTART = dtstart;
+            DESCRIPTION = desc;
+            Location = Location.SetLocation(location);
+        }
 
-    public string UID;
-    public string SUMMARY { get; set; }
-    public string DTSTART { get; set; }
-    public DateTime DTEND { get; set; }
-    public Prayer DESCRIPTION { get; set; }
+        public string UID { get; } = Guid.NewGuid().ToString();
+        public string SUMMARY { get; set; }
+        public string DTSTART { get; set; }
+        //public DateTime DTEND { get; set; }
+        public Prayer DESCRIPTION { get; set; }
+        public Location Location { get; }
+        public Status STATUS { get; } = Status.CONFIRMED;
 
-    public Location Location { get; set; }
-    public Status STATUS { get; set; } = Status.CONFIRMED; 
-
-    public override string ToString()
-    {
-        var sb = new StringBuilder();
-        sb.AppendLine("BEGIN:VEVENT");
-        sb.AppendLine($"UID:{Guid.NewGuid()}");
-        sb.AppendLine($"SUMMARY:{DESCRIPTION} Prayer Time");
-        sb.AppendLine($"DTSTART;TZID={Location.Country}/{Location.City}:{DTSTART}");
-        //sb.AppendLine($"DTEND;TZID={Location.Country}/{Location.City}:{DTEND.ToString("yyyyMMdd'T'HHmmss")}");
-        //sb.AppendLine("DESCRIPTION:{DESCRIPTION} Prayer Time");
-        sb.AppendLine($"STATUS:{STATUS}");
-        sb.AppendLine("END:VEVENT");
-        return sb.ToString();
+        public override string ToString()
+        {
+            var sb = new StringBuilder();
+            sb.AppendLine("BEGIN:VEVENT");
+            sb.AppendLine($"UID:{UID}");
+            sb.AppendLine($"SUMMARY:{DESCRIPTION} Prayer Time");
+            sb.AppendLine($"DTSTART;TZID={Location.Country}/{Location.City}:{DTSTART}");
+            //sb.AppendLine($"DTEND;TZID={Location.Country}/{Location.City}:{DTEND.ToString("yyyyMMdd'T'HHmmss")}");
+            //sb.AppendLine("DESCRIPTION:{DESCRIPTION} Prayer Time");
+            sb.AppendLine($"STATUS:{STATUS}");
+            sb.AppendLine("END:VEVENT");
+            return sb.ToString();
+        }
     }
 }
-
 
 public enum Status
 { 

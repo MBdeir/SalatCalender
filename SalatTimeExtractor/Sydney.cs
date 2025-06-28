@@ -7,6 +7,8 @@ public static partial class Scrapper
     public class Sydney 
     {
         private const string URL = "https://www.aljaafaria.com.au";
+
+        private const City city = City.Sydney;
         public static async Task<SalatDTO> Run()
         {
             var httpClient = new HttpClient();
@@ -50,7 +52,7 @@ public static partial class Scrapper
                     var prayerToAdd = new Prayers
                     {
                         PrayerName = prayer,
-                        PrayerTime = HelperMethods.DateInString(PrayerTime)
+                        PrayerTime = HelperMethods.ToString(PrayerTime, Location.SetLocation(city))
                     };
 
                     PrayersToReturn.Prayers.Add(prayerToAdd);
