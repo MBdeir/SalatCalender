@@ -19,11 +19,11 @@ public class Location
             City.Beirut => Country.Lebanon,
             _ => throw new Exception("Country not supported yet")
         };
-
         return new Location(city, country);
     }
 }
 
+#region Enums
 public enum Country
 {
     Australia,
@@ -34,4 +34,5 @@ public enum City
 {
     Sydney,
     Beirut
-}
+} 
+#endregion

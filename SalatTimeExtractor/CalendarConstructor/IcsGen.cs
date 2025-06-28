@@ -7,6 +7,18 @@ public class Calender
     private const string AppName = "SalatCal";
     public List<Event> Events { get; set; } = new();
 
+    public Location Location { get; set; }
+
+    public Calender(SalatDTO dto, City city) 
+    {
+        foreach (var prayer in dto.Prayers)
+        {
+            Events.Add(new Event(prayer.PrayerTime, prayer.PrayerName));
+        }
+        
+        Location = Location.SetLocation(city);
+    }
+
     public string ToString()
     {
         StringBuilder sb = new();
@@ -19,7 +31,7 @@ public class Calender
 
         foreach (var _event in Events)
         {
-            sb.AppendLine(_event.ToString());
+            sb.AppendLine(_event.ToString(Location));
         }
 
         sb.Append("END:VCALENDAR");
@@ -28,11 +40,10 @@ public class Calender
 
     public class Event
     {
-        public Event(string dtstart, Prayer desc, City location)
+        public Event(string PrayerTime, Prayer PrayerName)
         {
-            DTSTART = dtstart;
-            DESCRIPTION = desc;
-            Location = Location.SetLocation(location);
+            DTSTART = PrayerTime;
+            DESCRIPTION = PrayerName;
         }
 
         public string UID { get; } = Guid.NewGuid().ToString();
@@ -40,10 +51,9 @@ public class Calender
         public string DTSTART { get; set; }
         //public DateTime DTEND { get; set; }
         public Prayer DESCRIPTION { get; set; }
-        public Location Location { get; }
         public Status STATUS { get; } = Status.CONFIRMED;
 
-        public override string ToString()
+        public string ToString(Location Location)
         {
             var sb = new StringBuilder();
             sb.AppendLine("BEGIN:VEVENT");

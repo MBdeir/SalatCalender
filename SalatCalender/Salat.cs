@@ -16,24 +16,14 @@ public class Salat
         _logger = logger;
     }
 
-    [Function("Test")]
-    public async Task<IActionResult> Run([HttpTrigger(AuthorizationLevel.Anonymous, "get", Route = $"salat.ics")] HttpRequest req)
+    [Function("Salat")]
+    public async Task<IActionResult> Run([HttpTrigger(AuthorizationLevel.Anonymous, "get", Route = "salat.ics")] HttpRequest req)
     {
         const City Sydney = City.Sydney;  
 
         var salatInfo = await Scrapper.Init(Sydney);
 
-        Calender todaysEvents = new Calender();
-        foreach (var prayer in salatInfo.Prayers)
-        {
-            var builtEvent = new Event(prayer.PrayerTime, prayer.PrayerName, );
-            todaysEvents.Events.Add(builtEvent);
-        }
-
-        var ics = todaysEvents.ToString();
-
-        //var filePath = Path.Combine("C:\\Users\\moeyb\\Code\\Mohammad\\SalatCalender\\SalatCalender", "calendar.ics");
-        //await File.WriteAllTextAsync(filePath, ics);
+        var ics = new Calender(salatInfo, Sydney).ToString();
 
         return new ContentResult
         {

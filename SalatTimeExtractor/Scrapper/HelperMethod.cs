@@ -1,6 +1,6 @@
 ﻿using System.Text;
 
-namespace SalatTimeExtractor;
+namespace SalatTimeExtractor.Scrapper;
 
 public static class HelperMethods
 {
@@ -12,9 +12,9 @@ public static class HelperMethods
         StringBuilder sb = new();
 
         var lexer = date.Split(" ");
-        
+
         var isPM = lexer.Last() == "PM";
-        
+
         var time = lexer.First().Split(":");
         string minute = time.Last();
 
