@@ -69,5 +69,5 @@ Beirut ```?city=Beirut``` <br>
 </ul>
 
 ## ☕ Buy me a coffee 
-Hope you found this as useful as I did, If you are looking to support my passion, you can buy me a coffee :) <br>
-<a href="coff.ee/moeynoworries" target="_blank"><img src="https://cdn.buymeacoffee.com/buttons/default-orange.png" alt="Buy Me A Coffee" height="41" width="174"></a>
+Hope you found this as useful as I did, If you are looking to support my passion, you can buy me a coffee :) <br> <br>
+<a href="https://coff.ee/moeynoworries" target="_blank"><img src="https://cdn.buymeacoffee.com/buttons/default-orange.png" alt="Buy Me A Coffee" height="41" width="174"></a>
