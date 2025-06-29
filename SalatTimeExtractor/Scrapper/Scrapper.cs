@@ -7,6 +7,7 @@ public static partial class Scrapper
         return city switch
         {
             City.Sydney => await Sydney.Run(),
+            City.Beirut => await Beirut.Run(),
             _ => new SalatDTO()
         };
     }

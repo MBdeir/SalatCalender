@@ -7,6 +7,7 @@ public static partial class Scrapper
     public class Sydney 
     {
         private const string URL = "https://www.aljaafaria.com.au";
+        //possible url? https://shiaa.com.au/salat/times/2025/nsw/{city}
 
         private const City city = City.Sydney;
         public static async Task<SalatDTO> Run()
