@@ -17,8 +17,8 @@ The full thing should look something like this: <br>
 <br>
 <br>
 
-<b> Step 2: </b>
-Grab that and append it at the end of this url: 
+<b> Step 3: </b>
+Add the Calendar to your device: 
 <table>
   <tr>
     <td align="center">
@@ -42,9 +42,32 @@ Grab that and append it at the end of this url:
     </td>
   </tr>
 </table>
+<br>
+<b>Bonus:</b>
+<table>
+  <tr>
+    <td align="center">
+      <img src="https://github.com/user-attachments/assets/4609d1fb-dec2-443b-9672-04ad134b0816" width="200"/>
+      <br><sub>Prayers in Calender widget in Home Screen</sub>
+    </td>
+    <td align="center">
+      <img src="" width="200"/>
+      <br><sub>Upcoming prayer in Lock Screen</sub>
+    </td>
+  </tr>
+</table>
+<br>
 
 ## 🏙️ Supported Cities 
 Sydney ```?city=Sydney``` <br>
 Beirut ```?city=Beirut``` <br>
 
-This is open source, if you feel you can contribute in a meaningful way, do contact me
+## 🏗️ Coming Soon 
+<ul>
+  <li>Support more cities</li>
+  <li>Adding important Islamic events to the calender</li>
+</ul>
+
+## ☕ Buy me a coffee 
+Hope you found this as useful as I did, If you are looking to support my passion, you can buy me a coffee :) <br>
+<a href="coff.ee/moeynoworries" target="_blank"><img src="https://cdn.buymeacoffee.com/buttons/default-orange.png" alt="Buy Me A Coffee" height="41" width="174"></a>
