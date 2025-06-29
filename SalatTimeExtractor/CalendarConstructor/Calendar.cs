@@ -6,7 +6,6 @@ public class Calender
 {
     private const string AppName = "SalatCal";
     public List<Event> Events { get; set; } = new();
-
     public Location Location { get; set; }
 
     public Calender(SalatDTO dto, City city) 
@@ -58,7 +57,7 @@ public class Calender
             var sb = new StringBuilder();
             sb.AppendLine("BEGIN:VEVENT");
             sb.AppendLine($"UID:{UID}");
-            sb.AppendLine($"SUMMARY:{DESCRIPTION} Prayer Time");
+            sb.AppendLine($"SUMMARY:{DESCRIPTION} Prayer");
             sb.AppendLine($"DTSTART;TZID={Location.Country}/{Location.City}:{DTSTART}");
             //sb.AppendLine($"DTEND;TZID={Location.Country}/{Location.City}:{DTEND.ToString("yyyyMMdd'T'HHmmss")}");
             //sb.AppendLine("DESCRIPTION:{DESCRIPTION} Prayer Time");
