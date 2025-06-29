@@ -1,5 +1,8 @@
-# Get ontop of your Salat with SalatCal! 📅
-SalatCal is an iOS calendar subscription that will highlight the times of Prayers in the day!
+# Get ontop of your Salat with SalatCal! 📅🤲
+Its understandle that life happens and we are all busy, but thats not an excuse to miss your prayers!!<br>
+The aim of SalatCal is help remind you of your prayers so that you can stucture your days better and inshallah pray on time <br>
+SalatCal is an <b>iOS</b> calendar subscription that will make each prayer an event in your Calendar app with the accurate prayer times!<br>
+You wont even need to ever search the web or lookup that calendar on your fridge for the prayer time, it will be spoon fed to you in the Calender <br>
 You dont need to do anything apart from the setup (which is really simple), leave the rest to us.
 
 ## 📦 Setup
@@ -60,12 +63,16 @@ Add the Calendar to your device:
 
 ## 🏙️ Supported Cities 
 Sydney ```?city=Sydney``` <br>
-Beirut ```?city=Beirut``` <br>
 
 ## 🏗️ Coming Soon 
 <ul>
-  <li>Support more cities</li>
+  <li>Support more cities
+    <ul>
+      <li>Beirut</li>
+    </ul>
+  </li>
   <li>Adding important Islamic events to the calender</li>
+  <li>Support for Android</li>
 </ul>
 
 ## ☕ Buy me a coffee 
