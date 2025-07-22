@@ -5,7 +5,7 @@ namespace SalatTimeExtractor;
 public class Beirut : IScrapper
 {
     public string URL { get; set; } = "https://www.urdupoint.com/islam/shia/beirut-prayer-timings.html";
-    public City city { get; } = City.Beirut;
+    public Location Location { get; } = Location.SetLocation(City.Beirut);
 
     private IEnumerable<HtmlNode> rows;
 
@@ -35,7 +35,7 @@ public class Beirut : IScrapper
                 new Prayer
                 {
                     PrayerName = PrayerEnum.Fajr,
-                    PrayerTime = HelperMethods.ToString(Scrape("Fajar"), Location.SetLocation(city))
+                    PrayerTime = HelperMethods.ToString(Scrape("Fajar"), Location)
                 }
             );
     }

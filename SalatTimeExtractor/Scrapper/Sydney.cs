@@ -4,13 +4,13 @@ namespace SalatTimeExtractor;
 
 public class Sydney : IScrapper
 {
-    public City city { get; } = City.Sydney;
-
     public string URL { get; } = "https://www.aljaafaria.com.au";
 
     public List<Prayer> Prayers { get; } = new();
 
     public DateTime LocalDateNow { get; } = DateTime.Now;
+
+    public Location Location { get; } = Location.SetLocation(City.Sydney);
 
     private HtmlNodeCollection _rows;
 
@@ -40,7 +40,7 @@ public class Sydney : IScrapper
                     new Prayer
                     {
                         PrayerName = prayer,
-                        PrayerTime = HelperMethods.ToString(prayerTime, Location.SetLocation(city)),
+                        PrayerTime = HelperMethods.ToString(prayerTime, Location),
                     });
             }
         }

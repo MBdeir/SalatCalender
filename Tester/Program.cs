@@ -1,6 +1,10 @@
 ﻿
 using SalatTimeExtractor;
 
-Console.WriteLine(HelperMethods.FindLocalTime(City.Sydney));
-Console.WriteLine(HelperMethods.FindLocalTime(City.Beirut));
+var location = Location.SetLocation(City.Beirut);
+
+Console.WriteLine(location.City);
+Console.WriteLine(location.Country);
+Console.WriteLine(location.TimeZone);
+Console.WriteLine(location.NowLocal);
 

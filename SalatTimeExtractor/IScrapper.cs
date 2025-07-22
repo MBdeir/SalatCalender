@@ -6,7 +6,7 @@ public interface IScrapper
     
     DateTime LocalDateNow { get; } //in the format of dd/mm/yyyy
     
-    City city { get; }
+    Location Location { get; }
     
     Task Run(); 
 
