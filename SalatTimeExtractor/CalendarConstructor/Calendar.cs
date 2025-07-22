@@ -12,8 +12,7 @@ public class Calender
     {
         foreach (var prayer in Prayers)
         {
-            //Events.Add(new Event(prayer.PrayerTime, prayer.PrayerName));
-            Events.Add(new Event("", prayer.PrayerName));
+            Events.Add(new Event(prayer.PrayerName, prayer.PrayerTime));
         }
         
         Location = Location.SetLocation(city);
@@ -40,9 +39,9 @@ public class Calender
 
     public class Event
     {
-        public Event(string PrayerTime, PrayerEnum PrayerName)
+        public Event(PrayerEnum PrayerName, DateTimeOffset PrayerTime)
         {
-            DTSTART = PrayerTime;
+            DTSTART = HelperMethods.ToString(PrayerTime);
             DESCRIPTION = PrayerName;
         }
 

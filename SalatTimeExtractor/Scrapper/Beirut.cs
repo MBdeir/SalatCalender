@@ -27,15 +27,15 @@ public class Beirut : IScrapper
             return;
         }
 
-        var dto = new SalatDTO();
-        dto.Prayers.Add
-            (
-                new Prayer
-                {
-                    PrayerName = PrayerEnum.Fajr,
-                    //PrayerTime = HelperMethods.ToString("Fajr", Location)
-                }
-            );
+        //var dto = new SalatDTO();
+        //dto.Prayers.Add
+        //    (
+        //        new Prayer
+        //        {
+        //            PrayerName = PrayerEnum.Fajr,
+        //            //PrayerTime = HelperMethods.ToString("Fajr", Location)
+        //        }
+        //    );
     }
 
     public string Tommorow(string prayerName) 
