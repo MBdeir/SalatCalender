@@ -1,3 +1,6 @@
-﻿string time = "5:11 PM";
+﻿
+using SalatTimeExtractor;
 
-Console.WriteLine(HelperMethods.DateInString(time));
+Console.WriteLine(HelperMethods.FindLocalTime(City.Sydney));
+Console.WriteLine(HelperMethods.FindLocalTime(City.Beirut));
+

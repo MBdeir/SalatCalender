@@ -1,6 +1,6 @@
 ﻿namespace SalatTimeExtractor;
 
-public enum Prayer
+public enum PrayerEnum
 {
     Fajr,
     Duhur,
@@ -11,12 +11,12 @@ public enum Prayer
 
 public class SalatDTO
 {
-    public List<Prayers> Prayers { get; set; } = new();
+    public List<Prayer> Prayers { get; set; } = new();
 }
 
-public class Prayers
+public class Prayer
 {
-    public Prayer PrayerName { get; set; }
+    public PrayerEnum PrayerName { get; set; }
 
     public string PrayerTime { get; set; }
 }

@@ -55,4 +55,13 @@ public static class HelperMethods
     }
 
     static string AppendZero(string s) => "0" + s;
+
+    public static DateTime FindLocalTime(City city)
+    {
+        var _location = Location.SetLocation(city);
+
+        TimeZoneInfo localTimeZone = TimeZoneInfo.FindSystemTimeZoneById($"{_location.Country}/{_location.City}");
+        DateTime localDateTime = TimeZoneInfo.ConvertTimeFromUtc(DateTime.UtcNow, localTimeZone);
+        return localDateTime;
+    }
 }

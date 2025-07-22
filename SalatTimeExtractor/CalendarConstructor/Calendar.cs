@@ -8,9 +8,9 @@ public class Calender
     public List<Event> Events { get; set; } = new();
     public Location Location { get; set; }
 
-    public Calender(SalatDTO dto, City city) 
+    public Calender(List<Prayer> Prayers, City city) 
     {
-        foreach (var prayer in dto.Prayers)
+        foreach (var prayer in Prayers)
         {
             Events.Add(new Event(prayer.PrayerTime, prayer.PrayerName));
         }
@@ -39,7 +39,7 @@ public class Calender
 
     public class Event
     {
-        public Event(string PrayerTime, Prayer PrayerName)
+        public Event(string PrayerTime, PrayerEnum PrayerName)
         {
             DTSTART = PrayerTime;
             DESCRIPTION = PrayerName;
@@ -49,7 +49,7 @@ public class Calender
         public string SUMMARY { get; set; }
         public string DTSTART { get; set; }
         //public DateTime DTEND { get; set; }
-        public Prayer DESCRIPTION { get; set; }
+        public PrayerEnum DESCRIPTION { get; set; }
         public Status STATUS { get; } = Status.CONFIRMED;
 
         public string ToString(Location Location)

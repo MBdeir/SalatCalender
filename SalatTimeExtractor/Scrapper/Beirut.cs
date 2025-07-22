@@ -1,86 +1,70 @@
 ﻿using HtmlAgilityPack;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace SalatTimeExtractor;
 
-public static partial class Scrapper
+public class Beirut : IScrapper
 {
-    public class Beirut
+    public string URL { get; set; } = "https://www.urdupoint.com/islam/shia/beirut-prayer-timings.html";
+    public City city { get; } = City.Beirut;
+
+    private IEnumerable<HtmlNode> rows;
+
+    public List<Prayer> Prayers { get; } = new();
+
+    public DateTime LocalDateNow { get; set; }
+
+    public async Task Run()
     {
-        private const string URL = "https://www.urdupoint.com/islam/shia/beirut-prayer-timings.html";
+        using var httpClient = new HttpClient();
+        var html = await httpClient.GetStringAsync(URL);
 
-        private const City city = City.Beirut;
-        public static async Task<SalatDTO> Run()
+        var doc = new HtmlDocument();
+        doc.LoadHtml(html);
+
+        rows  = doc.DocumentNode.SelectNodes("//table[contains(@class,'prayer_table')]//tr")?? Enumerable.Empty<HtmlNode>();
+
+        if (!rows.Any())
         {
-            using var httpClient = new HttpClient();
-            var html = await httpClient.GetStringAsync(URL);
-
-            var doc = new HtmlDocument();
-            doc.LoadHtml(html);
-
-            // grab all <tr> in our prayer_table
-            var rows = doc.DocumentNode
-                          .SelectNodes("//table[contains(@class,'prayer_table')]//tr")
-                      ?? Enumerable.Empty<HtmlNode>();
-
-            if (!rows.Any())
-            {
-                Console.WriteLine("No prayer time rows found.");
-                return new SalatDTO();
-            }
-
-            string GetTime(string prayerName)
-            {
-                foreach (var row in rows)
-                {
-                    var titleNode = row.SelectSingleNode("./th//span");
-                    if (titleNode != null
-                     && string.Equals(titleNode.InnerText.Trim(), prayerName, StringComparison.OrdinalIgnoreCase))
-                    {
-                        // first <td> with the time
-                        var timeNode = row.SelectSingleNode("./td[contains(@class,'arial') and contains(@class,'ltr')]");
-                        if (timeNode != null)
-                            return HtmlEntity.DeEntitize(timeNode.InnerText.Trim());
-                    }
-                }
-                return string.Empty;
-            }
-
-
-            Console.WriteLine(GetTime("Fajar"));
-
-
-            var dto = new SalatDTO();
-            dto.Prayers.Add
-                (
-                    new Prayers
-                    {
-                        PrayerName = Prayer.Fajr,
-                        PrayerTime = HelperMethods.ToString(GetTime("Fajar"), Location.SetLocation(city))
-                    }
-                );
-
-
-
-
-            //foreach (Prayer prayer in Enum.GetValues(typeof(Prayer)))
-            //{
-            //    var txt = GetTime(prayer.ToString());
-            //    if (!string.IsNullOrEmpty(txt))
-            //    {
-            //        dto.Prayers.Add(new Prayers
-            //        {
-            //            PrayerName = prayer,
-            //            PrayerTime = HelperMethods.ToString(txt, Location.SetLocation(city))
-            //        });
-            //    }
-            //}
-
-            return dto;
+            Console.WriteLine("No prayer time rows found.");
+            return;
         }
+
+        var dto = new SalatDTO();
+        dto.Prayers.Add
+            (
+                new Prayer
+                {
+                    PrayerName = PrayerEnum.Fajr,
+                    PrayerTime = HelperMethods.ToString(Scrape("Fajar"), Location.SetLocation(city))
+                }
+            );
+    }
+
+    public string Scrape(string prayerName) => Scrape(rows, prayerName);
+
+    public string Scrape(IEnumerable<HtmlNode> rows, string prayerName) 
+    {
+        foreach (var row in rows)
+        {
+            var titleNode = row.SelectSingleNode("./th//span");
+            if (titleNode != null
+             && string.Equals(titleNode.InnerText.Trim(), prayerName, StringComparison.OrdinalIgnoreCase))
+            {
+                var timeNode = row.SelectSingleNode("./td[contains(@class,'arial') and contains(@class,'ltr')]");
+                if (timeNode != null)
+                    return HtmlEntity.DeEntitize(timeNode.InnerText.Trim());
+            }
+        }
+        return string.Empty;
+    }
+
+    public string Tommorow(string prayerName) 
+    {
+        return string.Empty;
+    }
+
+    public string Today(string prayerName)
+    {
+        return string.Empty;
     }
 }

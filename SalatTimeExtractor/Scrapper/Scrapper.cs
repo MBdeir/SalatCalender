@@ -2,13 +2,15 @@
 
 public static partial class Scrapper
 {
-    public static async Task<SalatDTO> Init(City city)
+    public static async Task<List<Prayer>> Init(City city)
     {
-        return city switch
+        IScrapper scrapper =  city switch
         {
-            City.Sydney => await Sydney.Run(),
-            City.Beirut => await Beirut.Run(),
-            _ => new SalatDTO()
+            City.Sydney => new Sydney(),
+            City.Beirut => new Beirut(),
         };
+
+        await scrapper.Run();
+        return scrapper.Prayers;
     }
 }

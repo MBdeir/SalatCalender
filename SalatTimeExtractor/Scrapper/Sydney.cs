@@ -2,64 +2,81 @@
 
 namespace SalatTimeExtractor;
 
-public static partial class Scrapper
+public class Sydney : IScrapper
 {
-    public class Sydney 
+    public City city { get; } = City.Sydney;
+
+    public string URL { get; } = "https://www.aljaafaria.com.au";
+
+    public List<Prayer> Prayers { get; } = new();
+
+    public DateTime LocalDateNow { get; } = DateTime.Now;
+
+    private HtmlNodeCollection _rows;
+
+    public async Task Run() 
     {
-        private const string URL = "https://www.aljaafaria.com.au";
-        //possible url? https://shiaa.com.au/salat/times/2025/nsw/{city}
+        var httpClient = new HttpClient();
+        var html = await httpClient.GetStringAsync(URL);
 
-        private const City city = City.Sydney;
-        public static async Task<SalatDTO> Run()
+        var doc = new HtmlDocument();
+        doc.LoadHtml(html);
+
+        _rows = doc.DocumentNode.SelectNodes("//div[contains(@class,'ptime-row')]");
+
+        if (_rows == null)
         {
-            var httpClient = new HttpClient();
-            var html = await httpClient.GetStringAsync(URL);
+            Console.WriteLine("No prayer time rows found.");
+            return;
+        }
 
-            var doc = new HtmlDocument();
-            doc.LoadHtml(html);
+        foreach (PrayerEnum prayer in Enum.GetValues(typeof(PrayerEnum)))
+        {
+            var prayerTime = Today(prayer.ToString());
 
-            var rows = doc.DocumentNode.SelectNodes("//div[contains(@class,'ptime-row')]");
-
-            if (rows == null)
+            if (!string.IsNullOrEmpty(prayerTime))
             {
-                Console.WriteLine("No prayer time rows found.");
-                return new SalatDTO { };
-            }
-
-            string GetTime(Prayer prayerName)
-            {
-                foreach (var row in rows)
-                {
-                    var titleNode = row.SelectSingleNode(".//span[contains(@class,'ptime-title')]");
-                    if (titleNode != null && titleNode.InnerText.Trim().Equals(prayerName.ToString(), StringComparison.OrdinalIgnoreCase))
-                    {
-                        var timeNode = row.SelectSingleNode(".//div[contains(@class,'col-xs-4')][2]/span");
-                        if (timeNode != null)
-                        {
-                            return HtmlEntity.DeEntitize(timeNode.InnerText.Split('<')[0].Trim());
-                        }
-                    }
-                }
-                return string.Empty;
-            }
-
-            var PrayersToReturn = new SalatDTO();
-
-            foreach (Prayer prayer in Enum.GetValues(typeof(Prayer)))
-            {
-                string PrayerTime = GetTime(prayer);
-                if (!string.IsNullOrEmpty(PrayerTime))
-                {
-                    var prayerToAdd = new Prayers
+                Prayers.Add(
+                    new Prayer
                     {
                         PrayerName = prayer,
-                        PrayerTime = HelperMethods.ToString(PrayerTime, Location.SetLocation(city))
-                    };
+                        PrayerTime = HelperMethods.ToString(prayerTime, Location.SetLocation(city)),
+                    });
+            }
+        }
+    }
 
-                    PrayersToReturn.Prayers.Add(prayerToAdd);
+    public string Today(string prayerName)
+    {
+        foreach (var row in _rows)
+        {
+            var titleNode = row.SelectSingleNode(".//span[contains(@class,'ptime-title')]");
+            if (titleNode != null && titleNode.InnerText.Trim().Equals(prayerName.ToString(), StringComparison.OrdinalIgnoreCase))
+            {
+                var timeNode = row.SelectSingleNode($".//div[contains(@class,'col-xs-4')][2]/span");
+                if (timeNode != null)
+                {
+                    return HtmlEntity.DeEntitize(timeNode.InnerText.Split('<')[0].Trim());
                 }
             }
-            return PrayersToReturn;
         }
+        return string.Empty;
+    }
+
+    public string Tommorow(string prayerName)
+    {
+        foreach (var row in _rows)
+        {
+            var titleNode = row.SelectSingleNode(".//span[contains(@class,'ptime-title')]");
+            if (titleNode != null && titleNode.InnerText.Trim().Equals(prayerName.ToString(), StringComparison.OrdinalIgnoreCase))
+            {
+                var timeNode = row.SelectSingleNode($".//div[contains(@class,'col-xs-4')][3]/span");
+                if (timeNode != null)
+                {
+                    return HtmlEntity.DeEntitize(timeNode.InnerText.Split('<')[0].Trim());
+                }
+            }
+        }
+        return string.Empty;
     }
 }
