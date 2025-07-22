@@ -12,7 +12,8 @@ public class Calender
     {
         foreach (var prayer in Prayers)
         {
-            Events.Add(new Event(prayer.PrayerTime, prayer.PrayerName));
+            //Events.Add(new Event(prayer.PrayerTime, prayer.PrayerName));
+            Events.Add(new Event("", prayer.PrayerName));
         }
         
         Location = Location.SetLocation(city);

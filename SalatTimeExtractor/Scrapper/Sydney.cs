@@ -8,8 +8,6 @@ public class Sydney : IScrapper
 
     public List<Prayer> Prayers { get; } = new();
 
-    public DateTime LocalDateNow { get; } = DateTime.Now;
-
     public Location Location { get; } = Location.SetLocation(City.Sydney);
 
     private HtmlNodeCollection _rows;
@@ -40,8 +38,28 @@ public class Sydney : IScrapper
                     new Prayer
                     {
                         PrayerName = prayer,
-                        PrayerTime = HelperMethods.ToString(prayerTime, Location),
+                        PrayerTime = HelperMethods.Parse(prayerTime, Location)
                     });
+            }
+        }
+
+        var Maghrib = Prayers.Where(x => x.PrayerName == PrayerEnum.Maghrib).FirstOrDefault();
+
+        if (Location.NowLocal > Maghrib.PrayerTime)
+        {
+            foreach (PrayerEnum prayer in Enum.GetValues(typeof(PrayerEnum)))
+            {
+                var prayerTime = Tommorow(prayer.ToString());
+
+                if (!string.IsNullOrEmpty(prayerTime))
+                {
+                    Prayers.Add(
+                        new Prayer
+                        {
+                            PrayerName = prayer,
+                            PrayerTime = HelperMethods.Parse(prayerTime, Location).AddDays(1)
+                        });
+                }
             }
         }
     }

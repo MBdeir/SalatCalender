@@ -4,8 +4,6 @@ public interface IScrapper
 {
     string URL { get; }
     
-    DateTime LocalDateNow { get; } //in the format of dd/mm/yyyy
-    
     Location Location { get; }
     
     Task Run(); 

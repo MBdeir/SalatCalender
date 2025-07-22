@@ -1,10 +1,9 @@
 ﻿
 using SalatTimeExtractor;
 
-var location = Location.SetLocation(City.Beirut);
 
-Console.WriteLine(location.City);
-Console.WriteLine(location.Country);
-Console.WriteLine(location.TimeZone);
-Console.WriteLine(location.NowLocal);
+var salatInfo = await Scrapper.Init(City.Sydney);
+
+salatInfo.ForEach(x => Console.WriteLine(x.PrayerName + " " + x.PrayerTime));
+
 

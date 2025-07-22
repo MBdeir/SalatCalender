@@ -11,8 +11,6 @@ public class Beirut : IScrapper
 
     public List<Prayer> Prayers { get; } = new();
 
-    public DateTime LocalDateNow { get; set; }
-
     public async Task Run()
     {
         using var httpClient = new HttpClient();
@@ -35,27 +33,9 @@ public class Beirut : IScrapper
                 new Prayer
                 {
                     PrayerName = PrayerEnum.Fajr,
-                    PrayerTime = HelperMethods.ToString(Scrape("Fajar"), Location)
+                    //PrayerTime = HelperMethods.ToString("Fajr", Location)
                 }
             );
-    }
-
-    public string Scrape(string prayerName) => Scrape(rows, prayerName);
-
-    public string Scrape(IEnumerable<HtmlNode> rows, string prayerName) 
-    {
-        foreach (var row in rows)
-        {
-            var titleNode = row.SelectSingleNode("./th//span");
-            if (titleNode != null
-             && string.Equals(titleNode.InnerText.Trim(), prayerName, StringComparison.OrdinalIgnoreCase))
-            {
-                var timeNode = row.SelectSingleNode("./td[contains(@class,'arial') and contains(@class,'ltr')]");
-                if (timeNode != null)
-                    return HtmlEntity.DeEntitize(timeNode.InnerText.Trim());
-            }
-        }
-        return string.Empty;
     }
 
     public string Tommorow(string prayerName) 

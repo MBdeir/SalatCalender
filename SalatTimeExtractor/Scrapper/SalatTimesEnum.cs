@@ -9,14 +9,9 @@ public enum PrayerEnum
     Isha
 }
 
-public class SalatDTO
-{
-    public List<Prayer> Prayers { get; set; } = new();
-}
-
 public class Prayer
 {
     public PrayerEnum PrayerName { get; set; }
 
-    public string PrayerTime { get; set; }
+    public DateTimeOffset PrayerTime { get; set; }
 }
