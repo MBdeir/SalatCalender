@@ -50,11 +50,11 @@ Add the Calendar to your device:
 <table>
   <tr>
     <td align="center">
-      <img src="https://github.com/user-attachments/assets/4609d1fb-dec2-443b-9672-04ad134b0816" width="200"/>
+      <img src="https://github.com/user-attachments/assets/1e34f042-dd36-49f4-965e-d505f5cfc13c" width="297" height="647"/>
       <br><sub>Prayers in Calender widget in Home Screen</sub>
     </td>
     <td align="center">
-      <img src="" width="200"/>
+      <img src="https://github.com/user-attachments/assets/05aac408-4bf5-4599-9df6-e29a30e42c3d" width="297" height="647"/>
       <br><sub>Upcoming prayer in Lock Screen</sub>
     </td>
   </tr>
