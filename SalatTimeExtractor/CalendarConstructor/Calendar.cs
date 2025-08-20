@@ -80,7 +80,7 @@ public class Calender
             {
                 var sb = new StringBuilder();
                 sb.AppendLine("BEGIN:VALARM");
-                sb.AppendLine("ACTION:AUDIO");
+                sb.AppendLine("ACTION:DISPLAY");
                 sb.AppendLine("TRIGGER:-PT15M");
                 sb.AppendLine($"DESCRIPTION:{Prayer} Prayer is in {TimeLeftForPrayer} minutes");
                 sb.AppendLine("END:VALARM");
