@@ -9,6 +9,8 @@ public static class HelperMethods
     //20250629T171100
     public static string ToString(DateTimeOffset PrayerTime) => PrayerTime.ToString("yyyyMMdd'T'HHmmss", CultureInfo.InvariantCulture);
 
+    public static DateTimeOffset Parse(string raw, City city) => Parse(raw, Location.SetLocation(city));
+
     public static DateTimeOffset Parse(string raw, Location loc)
     {
         string[] Formats = { "h:mm tt", "hh:mm tt" };
