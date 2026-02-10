@@ -57,6 +57,10 @@ Add the Calendar to your device:
       <img src="https://github.com/user-attachments/assets/05aac408-4bf5-4599-9df6-e29a30e42c3d" width="297" height="647"/>
       <br><sub>Upcoming prayer in Lock Screen</sub>
     </td>
+    <td align="center">
+      <img src="https://github.com/user-attachments/assets/ffa2df50-bb7c-42fc-b442-4ff3c2a5b529" width="297" height="647"/>
+      <br><sub>Make sure to uncheck "Remove Alerts" to receive notifications</sub></sub>
+    </td>
   </tr>
 </table>
 <br>
