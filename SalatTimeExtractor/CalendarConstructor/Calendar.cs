@@ -1,6 +1,4 @@
-﻿using System;
-using System.Text;
-using static System.Runtime.InteropServices.JavaScript.JSType;
+﻿using System.Text;
 
 namespace SalatTimeExtractor;
 
@@ -45,6 +43,7 @@ public class Calender
         {
             DTSTART = HelperMethods.ToString(PrayerTime);
             Prayer = PrayerName;
+            alarm = new Alarm();
         }
 
         public string UID { get; } = Guid.NewGuid().ToString();
@@ -54,6 +53,8 @@ public class Calender
         //public DateTime DTEND { get; set; }
         public PrayerEnum Prayer { get; set; }
         public Status STATUS { get; } = Status.CONFIRMED;
+
+        public Alarm alarm { get; set; } 
 
         public string ToString(Location Location)
         {
@@ -65,13 +66,16 @@ public class Calender
             //sb.AppendLine($"DTEND;TZID={Location.Country}/{Location.City}:{DTEND.ToString("yyyyMMdd'T'HHmmss")}");
             //sb.AppendLine("DESCRIPTION:{DESCRIPTION} Prayer Time");
             sb.AppendLine($"STATUS:{STATUS}");
-            sb.Append(new Alarm().ToString(Prayer));
+            sb.Append(alarm.ToString(Prayer));
             sb.AppendLine("END:VEVENT");
             return sb.ToString();
         }
-        public class Alarm
+        
+    }
+
+    public class Alarm
         {
-            private const int TimeLeftForPrayer = 15;
+            public int TimeLeftForPrayerInMins { get; set; } = 15;
             public Alarm() 
             {
             }
@@ -81,13 +85,12 @@ public class Calender
                 var sb = new StringBuilder();
                 sb.AppendLine("BEGIN:VALARM");
                 sb.AppendLine("ACTION:DISPLAY");
-                sb.AppendLine("TRIGGER:-PT15M");
-                sb.AppendLine($"DESCRIPTION:{Prayer} Prayer is in {TimeLeftForPrayer} minutes");
+                sb.AppendLine($"TRIGGER:-PT{TimeLeftForPrayerInMins}M");
+                sb.AppendLine($"SUMMARY:{Prayer} Prayer is in {TimeLeftForPrayerInMins} minutes");
                 sb.AppendLine("END:VALARM");
                 return sb.ToString();
             }
         }
-    }
 }
 
 public enum Status

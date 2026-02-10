@@ -8,6 +8,7 @@ public static partial class Scrapper
         {
             City.Sydney => new Sydney(),
             City.Beirut => new Beirut(),
+            _           => throw new Exception($"No implementation for {city} yet"),
         };
 
         await scrapper.Run();
