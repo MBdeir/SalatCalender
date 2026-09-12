@@ -26,5 +26,5 @@ public static class HelperMethods
         return new DateTimeOffset(localDateTime, offset);
     }
 
-    public static string ToSimple(DateTimeOffset time) => time.ToString("h:mm tt");
+    public static string ToSimple(DateTimeOffset time) => time.ToString("h:mm tt", CultureInfo.InvariantCulture);
 }

@@ -31,8 +31,9 @@ public class IHIC : IScrapper
 
         if (prayerTimesNode == null)
         {
-            Console.WriteLine("No prayer time data found.");
-            return;
+            var title = doc.DocumentNode.SelectSingleNode("//title")?.InnerText ?? "(no title)";
+            var snippet = html.Length > 500 ? html[..500] : html;
+            throw new Exception($"No #prayer_times div found. Page title: '{title}'. HTML start: {snippet}");
         }
 
         var header = string.Join(',', PrayerSpanClasses.Keys);
