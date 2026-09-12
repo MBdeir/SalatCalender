@@ -39,10 +39,10 @@ public class Calender
 
     public class Event
     {
-        public Event(PrayerEnum PrayerName, DateTimeOffset PrayerTime)
+        public Event(PrayerEnum prayerName, DateTimeOffset prayerTime)
         {
-            DTSTART = HelperMethods.ToString(PrayerTime);
-            Prayer = PrayerName;
+            DTSTART = HelperMethods.ToString(prayerTime);
+            Prayer = prayerName;
             alarm = new Alarm();
         }
 
@@ -95,7 +95,7 @@ public class Calender
 
 public enum Status
 {
-    CANCLLED,
+    CANCELLED,
     TENTATIVE,
     CONFIRMED
 }

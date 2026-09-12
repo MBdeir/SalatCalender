@@ -1,5 +1,4 @@
 ﻿using System.Globalization;
-using System.Text;
 
 namespace SalatTimeExtractor;
 
@@ -13,7 +12,7 @@ public static class HelperMethods
 
     public static DateTimeOffset Parse(string raw, Location loc)
     {
-        string[] Formats = { "h:mm tt", "hh:mm tt" };
+        string[] Formats = { "h:mm tt", "hh:mm tt", "H:mm", "HH:mm" };
 
         if (!DateTime.TryParseExact(raw.Trim(), Formats, CultureInfo.InvariantCulture,
                                     DateTimeStyles.None, out var t))
@@ -26,4 +25,6 @@ public static class HelperMethods
         var offset = loc.TimeZone.GetUtcOffset(localDateTime);
         return new DateTimeOffset(localDateTime, offset);
     }
+
+    public static string ToSimple(DateTimeOffset time) => time.ToString("h:mm tt");
 }

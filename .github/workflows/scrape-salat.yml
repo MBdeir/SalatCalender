@@ -1,0 +1,42 @@
+name: Scrape Salat Times
+
+on:
+  schedule:
+    # 15:00 UTC lands just after midnight Sydney time year-round
+    # (AEST +10 -> 01:00, AEDT +11 -> 02:00), well before Fajr.
+    - cron: "0 15 * * *"
+  workflow_dispatch: {}
+
+permissions:
+  contents: write
+
+jobs:
+  scrape:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-dotnet@v4
+        with:
+          dotnet-version: "10.0.x"
+
+      - name: Build exporter
+        run: dotnet build SalatExporter/SalatExporter.csproj -c Release
+
+      - name: Install Playwright browser
+        run: pwsh SalatExporter/bin/Release/net10.0/playwright.ps1 install --with-deps chromium
+
+      - name: Run exporter
+        run: dotnet run --project SalatExporter -c Release --no-build -- data/salat.json
+
+      - name: Commit updated prayer times
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "github-actions[bot]@users.noreply.github.com"
+          git add data/salat.json
+          if git diff --cached --quiet; then
+            echo "No changes to commit"
+          else
+            git commit -m "Update salat times for $(date -u +'%Y-%m-%d')"
+            git push
+          fi
