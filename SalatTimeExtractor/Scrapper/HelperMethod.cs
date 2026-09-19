@@ -12,16 +12,21 @@ public static class HelperMethods
 
     public static DateTimeOffset Parse(string raw, Location loc)
     {
+        // Local “today” in that time zone
+        var nowLocal = TimeZoneInfo.ConvertTime(DateTime.UtcNow, loc.TimeZone);
+
+        return Parse(raw, loc, nowLocal.Date);
+    }
+
+    public static DateTimeOffset Parse(string raw, Location loc, DateTime date)
+    {
         string[] Formats = { "h:mm tt", "hh:mm tt", "H:mm", "HH:mm" };
 
         if (!DateTime.TryParseExact(raw.Trim(), Formats, CultureInfo.InvariantCulture,
                                     DateTimeStyles.None, out var t))
             throw new FormatException($"Cannot parse time: '{raw}'");
 
-        // Local “today” in that time zone
-        var nowLocal = TimeZoneInfo.ConvertTime(DateTime.UtcNow, loc.TimeZone);
-
-        var localDateTime = nowLocal.Date.Add(t.TimeOfDay);
+        var localDateTime = date.Date.Add(t.TimeOfDay);
         var offset = loc.TimeZone.GetUtcOffset(localDateTime);
         return new DateTimeOffset(localDateTime, offset);
     }

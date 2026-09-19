@@ -7,11 +7,10 @@ public static partial class Scrapper
         IScrapper scrapper =  city switch
         {
             City.Sydney => new Sydney(),
-            City.Beirut => new Beirut(),
             _           => throw new Exception($"No implementation for {city} yet"),
         };
 
-        await scrapper.Run();
+        await scrapper.WebPage.Run();
         return scrapper.Prayers;
     }
 }

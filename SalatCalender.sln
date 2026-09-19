@@ -3,7 +3,7 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 17
 VisualStudioVersion = 17.8.34511.84
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "SalatCalender", "SalatCalender\SalatCalender.csproj", "{5EBFD694-419A-40B3-B448-A0A5EE11BD0D}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "SalatCalendar", "SalatCalendar\SalatCalendar.csproj", "{5EBFD694-419A-40B3-B448-A0A5EE11BD0D}"
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "SalatTimeExtractor", "SalatTimeExtractor\SalatTimeExtractor.csproj", "{BFACFC68-1556-479A-86F1-C5DC0D32DED6}"
 EndProject
